@@ -6,11 +6,11 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:45:07 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/10 01:10:51 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/10 01:38:19 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "get_next_line.h"
+#include "get_next_line.h"
 
 /*void	ft_free(char **str)
 {
@@ -26,8 +26,8 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
-	if(!str)
-		return 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\0')
 	{
 		i++;
@@ -69,8 +69,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	while (s2[j] != '\0')
 		mrg[i++] = s2[j++];
-	if(s1)
-		free((char*)s1);
+	if (s1)
+		free ((char *)s1);
 	mrg[i] = '\0';
 	return (mrg);
 }

@@ -6,22 +6,22 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/10 01:13:12 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/10 01:55:29 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "get_next_line.h"
+#include "get_next_line.h"
 
 //se retornar null da free no storage!!! se
 //ele for diferente de 0;
-char *read_fd(int fd, char *storage)
+char	*read_fd(int fd, char *storage)
 {
 	int		i;
-	char 	*buf;
+	char	*buf;
 
 	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
-		return NULL;
+		return (NULL);
 	i = 1;
 	while (i != 0)
 	{
@@ -29,11 +29,11 @@ char *read_fd(int fd, char *storage)
 		if (i == -1)
 		{
 			free(buf);
-			return NULL;
+			return (NULL);
 		}
 		buf[i] = 0;
 		storage = ft_strjoin(storage, buf);
-	    if (!ft_strchr(buf, '\n') && storage)
+		if (!ft_strchr(buf, '\n') && storage)
 			break ;
 	}
 	free(buf);
@@ -98,7 +98,7 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*storage;
-	
+
 	if (fd < 0 && BUFFER_SIZE < 1)
 		return (NULL);
 	storage = read_fd(fd, storage);
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int		fd;
 	char	*s;
@@ -128,20 +128,19 @@ int	main(void)
 		else
 			break;
 	}
-}
+}*/
 
 /*int	main(int argc, char **argv)
 {
 	int	fd;
 	char	*line;
 
-	(void)argc;			// Casting argc to quiet the compiler's warnings.
-	fd = open(argv[1], O_RDONLY); 	// Open the file given as an argument at program launch
-	line = "";			// Initialize this variable to be able to use it in the following loop
+	(void)argc;
+	fd = open(argv[1], O_RDONLY);
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
-		printf("%s", line);	// We're omitting any \n in this printf because get_next_line is supposed to include the \n for each line
+		printf("%s", line);
 	}
 	fd = close(fd);
 	return (0);
