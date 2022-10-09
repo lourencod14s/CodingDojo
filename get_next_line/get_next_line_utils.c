@@ -6,7 +6,7 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:45:07 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/06 04:24:57 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:50:21 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
+	if(!str)
+		return 0;
 	while (str[i] != '\0')
 	{
 		i++;
@@ -47,25 +49,6 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strdup(const char *s)
-{
-	char	*str;
-	int		i;
-
-	str = NULL;
-	str = (char *) malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!str)
-		return ("Memory allocation error!");
-	i = 0;
-	while (s[i] != '\0')
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*mrg;
@@ -74,22 +57,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	size = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-	mrg = (char *) malloc((size + 1) * sizeof(char));
+	mrg = (char *) malloc((size + 1) * sizeof(char));//(char*)
 	if (!mrg)
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	while (s1 && s1[i] != '\0')
 	{
 		mrg[i] = s1[i];
 		i++;
 	}
 	j = 0;
 	while (s2[j] != '\0')
-	{
-		mrg[i] = s2[j];
-		j++;
-		i++;
-	}
+		mrg[i++] = s2[j++];
+	//if(s1)
+	//	free((char*)s1);
 	mrg[i] = '\0';
 	return (mrg);
 }

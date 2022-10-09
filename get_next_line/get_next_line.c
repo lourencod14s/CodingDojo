@@ -5,61 +5,111 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 23:42:22 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/07 01:37:59 by ldias-fe         ###   ########.fr       */
+/*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
+/*   Updated: 2022/10/09 22:55:10 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "get_next_line.h"
 
-char *get_next_line(int fd)
+//se retornar null da free no storage!!! se
+//ele for diferente de 0;
+char *read_fd(int fd, char *storage)
 {
-	static char	*storage;
-	char		*buff;
-	char		*tmp;
-	char		*line;
-	int			i;
-	int 		j;
-	
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (0);
-	i = read(fd, buff, BUFFER_SIZE);
-	if (i == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
-	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	while (i > 0)
+	int		i;
+	char 	*buf;
+
+	buf = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));// (char *)
+	if (!buf)
+		return NULL;
+	i = 1;
+	while (i != 0)
 	{
-		buff[i] = '\0';
-		if (!storage)
-			storage = ft_strdup(buff);
-		else
+		i = read(fd, buf, BUFFER_SIZE);
+		if (i == -1)
 		{
-			tmp = ft_strjoin(storage, buff);
-			free (storage);
-			storage = tmp;
+			free(buf);
+			return NULL;
 		}
-		if (ft_strchr(storage, '\n'))
-		{
-			j = 0;
-			while (storage[j] != '\n')
-				j++;
-			line = ft_substr(storage, 0, j + 1);
-			storage = ft_strdup(ft_strchr(storage, '\n') + 1);
-			free(tmp);
+		buf[i] = 0;
+		storage = ft_strjoin(storage, buf);
+	    if (!ft_strchr(buf, '\n') && storage)
 			break ;
-		}
-		i = read(fd, buff, BUFFER_SIZE);
 	}
+	free(buf);
+	return (storage);
+}
+
+char	*prepare_line(char *storage)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	while (storage[i] && storage[i] != '\n')
+		i++;
+	if (!storage[i])
+	{
+		free(storage);
+		return (NULL);
+	}
+	str = (char *) malloc(sizeof(char) * (ft_strlen(storage) - i + 1));
+	if (!str)
+		return (NULL);
+	i++;
+	j = 0;
+	while (storage[i])
+		str[j++] = storage[i++];
+	str[j] = '\0';
+	free(storage);
+	return (str);
+}
+
+char	*get_line(char *storage)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	if (!storage[i])
+		return (NULL);
+	while (storage[i] && storage[i] != '\n')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 2));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (storage[i] && storage[i] != '\n')
+	{
+		str[i] = storage[i];
+		i++;
+	}
+	if (storage[i] == '\n')
+	{
+		str[i] = storage[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*line;
+	static char	*storage;
+	
+	if (fd < 0 && BUFFER_SIZE < 1)
+		return (NULL);
+	storage = read_fd(fd, storage);
+	if (!storage)
+		return (NULL);
+	line = get_line(storage);
+	storage = prepare_line(storage);
 	return (line);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int		fd;
 	char	*s;
@@ -67,13 +117,32 @@ int	main(void)
 
 	i = 0;
 	fd = open("file.txt", O_RDONLY);
-	while(i < 7)
+	while(1)
 	{
 		s = get_next_line(fd);
-		printf("%s", s);
-		free(s);
-		i++;
+		if (s)
+		{
+			printf("%s", s);
+			free(s);
+		}
+		else
+			break;
 	}
-}
+}*/
 
-// valgrind --leak-check=full --show-leak-kinds=all gcc -g
+/*int	main(int argc, char **argv)
+{
+	int	fd;
+	char	*line;
+
+	(void)argc;			// Casting argc to quiet the compiler's warnings.
+	fd = open(argv[1], O_RDONLY); 	// Open the file given as an argument at program launch
+	line = "";			// Initialize this variable to be able to use it in the following loop
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);	// We're omitting any \n in this printf because get_next_line is supposed to include the \n for each line
+	}
+	fd = close(fd);
+	return (0);
+}*/
