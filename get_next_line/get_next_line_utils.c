@@ -6,7 +6,7 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:45:07 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/09 22:50:21 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/10 01:10:51 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	size = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-	mrg = (char *) malloc((size + 1) * sizeof(char));//(char*)
+	mrg = malloc((size + 1) * sizeof(char));
 	if (!mrg)
 		return (NULL);
 	i = 0;
@@ -69,8 +69,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	while (s2[j] != '\0')
 		mrg[i++] = s2[j++];
-	//if(s1)
-	//	free((char*)s1);
+	if(s1)
+		free((char*)s1);
 	mrg[i] = '\0';
 	return (mrg);
 }
@@ -79,7 +79,7 @@ static char	*ft_bug(void)
 {
 	char	*bug;
 
-	bug = (char *) malloc(sizeof(char));
+	bug = malloc(1 * sizeof(char));
 	bug[0] = 0;
 	return (bug);
 }
@@ -96,7 +96,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_bug());
 	if (len >= buf)
 		len = buf - start;
-	sub = (char *) malloc((len + 1) * sizeof(char));
+	sub = malloc((len + 1) * sizeof(char));
 	if (!sub || !s)
 		return (0);
 	i = 0;

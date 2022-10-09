@@ -6,7 +6,7 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/09 22:55:10 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/10 01:13:12 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char *read_fd(int fd, char *storage)
 	int		i;
 	char 	*buf;
 
-	buf = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));// (char *)
+	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return NULL;
 	i = 1;
@@ -54,7 +54,7 @@ char	*prepare_line(char *storage)
 		free(storage);
 		return (NULL);
 	}
-	str = (char *) malloc(sizeof(char) * (ft_strlen(storage) - i + 1));
+	str = malloc(sizeof(char) * (ft_strlen(storage) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;
@@ -76,7 +76,7 @@ char	*get_line(char *storage)
 		return (NULL);
 	while (storage[i] && storage[i] != '\n')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
+	str = malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*int	main(void)
+int	main(void)
 {
 	int		fd;
 	char	*s;
@@ -128,7 +128,7 @@ char	*get_next_line(int fd)
 		else
 			break;
 	}
-}*/
+}
 
 /*int	main(int argc, char **argv)
 {
