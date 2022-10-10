@@ -6,7 +6,7 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/10 01:55:29 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:22:21 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ char	*read_fd(int fd, char *storage)
 			free(buf);
 			return (NULL);
 		}
-		buf[i] = 0;
+		buf[i] = '\0';
 		storage = ft_strjoin(storage, buf);
-		if (!ft_strchr(buf, '\n') && storage)
+		if (ft_strchr(buf, '\n') && storage)
 			break ;
 	}
 	free(buf);
@@ -85,7 +85,7 @@ char	*get_line(char *storage)
 		str[i] = storage[i];
 		i++;
 	}
-	if (storage[i] == '\n')
+	if (storage[i] && storage[i] == '\n')
 	{
 		str[i] = storage[i];
 		i++;
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*int	main(void)
+int	main(void)
 {
 	int		fd;
 	char	*s;
@@ -122,14 +122,15 @@ char	*get_next_line(int fd)
 		s = get_next_line(fd);
 		if (s)
 		{
-			printf("%s", s);
+			printf("%s",s);
 			free(s);
 		}
 		else
 			break;
 	}
-}*/
-
+	close(fd);
+}
+/* Este main() possui argumentos para testar na execução*/
 /*int	main(int argc, char **argv)
 {
 	int	fd;
