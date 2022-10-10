@@ -6,7 +6,7 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/11 02:33:30 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:24:44 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static char	*get_line(char *storage)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*storage[4096];
+	static char	*storage[1024];
 
 	if (fd < 0 && BUFFER_SIZE < 1)
 		return (NULL);
