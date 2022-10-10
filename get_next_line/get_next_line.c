@@ -6,7 +6,7 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/10 22:22:21 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:25:16 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int		fd;
 	char	*s;
@@ -129,7 +129,7 @@ int	main(void)
 			break;
 	}
 	close(fd);
-}
+}*/
 /* Este main() possui argumentos para testar na execução*/
 /*int	main(int argc, char **argv)
 {
