@@ -6,7 +6,7 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:45:13 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/11 02:38:17 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:38:34 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ char		*get_next_line(int fd);
 char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlen(const char *str);
 char		*ft_strchr(const char *s, int c);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

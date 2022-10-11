@@ -6,20 +6,11 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:45:07 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/10 22:22:42 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:33:00 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-/*void	ft_free(char **str)
-{
-	if (str != NULL && *str != '\0')
-	{
-		free(*str);
-		str = NULL;
-	}
-}*/
 
 size_t	ft_strlen(const char *str)
 {
@@ -73,42 +64,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		free ((char *)s1);
 	mrg[i] = '\0';
 	return (mrg);
-}
-
-static char	*ft_bug(void)
-{
-	char	*bug;
-
-	bug = malloc(1 * sizeof(char));
-	bug[0] = 0;
-	return (bug);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char			*sub;
-	unsigned int	i;
-	size_t			j;
-	size_t			buf;
-
-	buf = ft_strlen(s);
-	if (start > buf)
-		return (ft_bug());
-	if (len >= buf)
-		len = buf - start;
-	sub = malloc((len + 1) * sizeof(char));
-	if (!sub || !s)
-		return (0);
-	i = 0;
-	while (s[i] != '\0' && i < start)
-		i++;
-	j = 0;
-	while (s[i] != '\0' && j < len)
-	{
-		sub[j] = (char)s[i];
-		i++;
-		j++;
-	}
-	sub[j] = '\0';
-	return (sub);
 }

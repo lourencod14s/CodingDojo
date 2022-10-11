@@ -6,11 +6,11 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/11 01:24:44 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:34:35 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_fd(int fd, char *storage)
 {

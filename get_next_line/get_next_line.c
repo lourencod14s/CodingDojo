@@ -6,7 +6,7 @@
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/11 01:27:59 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:38:23 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*get_line(char *storage)
 		str[i] = storage[i];
 		i++;
 	}
-	if (storage[i] && storage[i] == '\n')
+	if (storage[i] == '\n')
 	{
 		str[i] = storage[i];
 		i++;
