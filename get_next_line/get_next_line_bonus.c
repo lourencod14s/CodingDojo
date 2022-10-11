@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldias-fe <ldias-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 05:16:16 by ldias-fe          #+#    #+#             */
-/*   Updated: 2022/10/11 02:34:44 by ldias-fe         ###   ########.fr       */
+/*   Updated: 2022/10/11 02:33:30 by ldias-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,15 @@ static char	*get_line(char *storage)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*storage;
+	static char	*storage[4096];
 
 	if (fd < 0 && BUFFER_SIZE < 1)
 		return (NULL);
-	storage = read_fd(fd, storage);
-	if (!storage)
+	storage[fd] = read_fd(fd, storage[fd]);
+	if (!storage[fd])
 		return (NULL);
-	line = get_line(storage);
-	storage = prepare_line(storage);
+	line = get_line(storage[fd]);
+	storage[fd] = prepare_line(storage[fd]);
 	return (line);
 }
 
